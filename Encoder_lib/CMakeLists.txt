@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.8) 
 
-project(Calculator_lib)				
+project(Encoder_lib)				
 
 set(SOURCE_LIB Encoder.cpp)	
 set(HEADER_LIB Encoder.h)
 
-set(CALCULATOR_LIB_DIR Encoder_lib)
+set(ENCODER_LIB_DIR Encoder_lib)
 
 add_library(Encoder_lib STATIC ${SOURCE_LIB} ${HEADER_LIB})
 
