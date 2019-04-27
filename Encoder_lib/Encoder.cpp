@@ -1,15 +1,15 @@
 #include "Encoder.h"
 
-void Hamming74Encode::Encode(std::vector<uint8_t> &input_data, std::vector<uint8_t> &output_data)
+std::vector<uint8_t> Hamming74Encode::Encode(std::vector<uint8_t> &input_data)
 {
 	CheckInputDataOnCorrect(input_data);
-	CheckInputDataOnSize(input_data);
+	AddingZeros(input_data);
 
 	int num_of_redundant_symbols = ((input_data.size() / 4) * 3);
-	output_data.resize(input_data.size() + num_of_redundant_symbols);
+	std::vector<uint8_t> output_data(input_data.size() + num_of_redundant_symbols);
 	
-	int j = 0; int i = 0;
-	for (i; i < output_data.size(); i += kNumOfOutputElements)
+	int j = 0; //It is necessary that at each iteration of the i-loop the j variable is not reset.
+	for (int i = 0; i < output_data.size(); i += kNumOfOutputElements)
 	{
 		for (j; j < input_data.size(); j++)
 		{
@@ -24,6 +24,8 @@ void Hamming74Encode::Encode(std::vector<uint8_t> &input_data, std::vector<uint8
 			break;
 		}
 	}
+
+	return output_data;
 }
 
 void Hamming74Encode::CheckInputDataOnCorrect(std::vector<uint8_t> &input_data)
@@ -37,7 +39,7 @@ void Hamming74Encode::CheckInputDataOnCorrect(std::vector<uint8_t> &input_data)
 	}
 }
 
-void Hamming74Encode::CheckInputDataOnSize(std::vector<uint8_t> &input_data)
+void Hamming74Encode::AddingZeros(std::vector<uint8_t> &input_data)
 {
 	std::uint8_t zero = 0;
 

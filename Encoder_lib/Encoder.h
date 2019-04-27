@@ -9,7 +9,7 @@ class IEncode
 public:
 	~IEncode() {}
 
-	virtual void Encode(std::vector<uint8_t> &input_data, std::vector<uint8_t> &output_data) = 0;
+	virtual std::vector<uint8_t> Encode(std::vector<uint8_t> &input_data) = 0;
 };
 
 class Hamming74Encode : public IEncode
@@ -21,7 +21,7 @@ private:
 public:
 	~Hamming74Encode() {}
 
-	void Encode(std::vector<uint8_t> &input_data, std::vector<uint8_t> &output_data) override;
+	std::vector<uint8_t> Encode(std::vector<uint8_t> &input_data) override;
 	void CheckInputDataOnCorrect(std::vector<uint8_t> &input_data);
-	void CheckInputDataOnSize(std::vector<uint8_t> &input_data);
+	void AddingZeros(std::vector<uint8_t> &input_data);
 };
