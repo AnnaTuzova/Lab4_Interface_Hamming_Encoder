@@ -34,7 +34,7 @@ std::vector<uint8_t> Hamming74Encode::Encode(std::vector<uint8_t> &input_data)
 	}
 }
 
-bool Hamming74Encode::CheckInputDataOnCorrect(std::vector<uint8_t> &input_data)
+bool Hamming74Encode::CheckInputDataOnCorrect(const std::vector<uint8_t> input_data) const
 {
 	int counter = 0;
 	for (int i = 0; i < input_data.size(); i++)

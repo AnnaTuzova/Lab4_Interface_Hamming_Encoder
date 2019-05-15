@@ -18,7 +18,7 @@ private:
 	const int kNumOfInputElements = 4;
 	const int kNumOfOutputElements = 7;
 
-	bool CheckInputDataOnCorrect(std::vector<uint8_t> &input_data);
+	bool CheckInputDataOnCorrect(const std::vector<uint8_t> input_data) const;
 	void AddingZeros(std::vector<uint8_t> &input_data);
 
 public:
