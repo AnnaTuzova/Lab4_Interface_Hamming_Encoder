@@ -18,10 +18,11 @@ private:
 	const int kNumOfInputElements = 4;
 	const int kNumOfOutputElements = 7;
 
+	bool CheckInputDataOnCorrect(std::vector<uint8_t> &input_data);
+	void AddingZeros(std::vector<uint8_t> &input_data);
+
 public:
 	~Hamming74Encode() {}
 
 	std::vector<uint8_t> Encode(std::vector<uint8_t> &input_data) override;
-	void CheckInputDataOnCorrect(std::vector<uint8_t> &input_data);
-	void AddingZeros(std::vector<uint8_t> &input_data);
 };

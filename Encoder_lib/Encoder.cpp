@@ -2,41 +2,53 @@
 
 std::vector<uint8_t> Hamming74Encode::Encode(std::vector<uint8_t> &input_data)
 {
-	CheckInputDataOnCorrect(input_data);
-	AddingZeros(input_data);
-
-	int num_of_redundant_symbols = ((input_data.size() / 4) * 3);
-	std::vector<uint8_t> output_data(input_data.size() + num_of_redundant_symbols);
-	
-	int j = 0; //It is necessary that at each iteration of the i-loop the j variable is not reset.
-	for (int i = 0; i < output_data.size(); i += kNumOfOutputElements)
+	if (CheckInputDataOnCorrect(input_data) == false)
 	{
-		for (j; j < input_data.size(); j++)
-		{
-			output_data.at(i) = input_data.at(j);
-			output_data.at(i + 1) = input_data.at(j + 1);
-			output_data.at(i + 2) = input_data.at(j + 2);
-			output_data.at(i + 3) = input_data.at(j + 3);
-			output_data.at(i + 4) = input_data.at(j) ^ input_data.at(j + 2) ^ input_data.at(j + 3);
-			output_data.at(i + 5) = input_data.at(j) ^ input_data.at(j + 1) ^ input_data.at(j + 2);
-			output_data.at(i + 6) = input_data.at(j + 1) ^ input_data.at(j + 2) ^ input_data.at(j + 3);
-			j += kNumOfInputElements;
-			break;
-		}
+		throw "Error: invalid input data.";
 	}
+	else
+	{
+		AddingZeros(input_data);
 
-	return output_data;
+		int num_of_redundant_symbols = ((input_data.size() / 4) * 3);
+		std::vector<uint8_t> output_data(input_data.size() + num_of_redundant_symbols);
+
+		int j = 0; //It is necessary that at each iteration of the i-loop the j variable is not reset.
+		for (int i = 0; i < output_data.size(); i += kNumOfOutputElements)
+		{
+			for (j; j < input_data.size(); j++)
+			{
+				output_data.at(i) = input_data.at(j);
+				output_data.at(i + 1) = input_data.at(j + 1);
+				output_data.at(i + 2) = input_data.at(j + 2);
+				output_data.at(i + 3) = input_data.at(j + 3);
+				output_data.at(i + 4) = input_data.at(j) ^ input_data.at(j + 2) ^ input_data.at(j + 3);
+				output_data.at(i + 5) = input_data.at(j) ^ input_data.at(j + 1) ^ input_data.at(j + 2);
+				output_data.at(i + 6) = input_data.at(j + 1) ^ input_data.at(j + 2) ^ input_data.at(j + 3);
+				j += kNumOfInputElements;
+				break;
+			}
+		}
+
+		return output_data;
+	}
 }
 
-void Hamming74Encode::CheckInputDataOnCorrect(std::vector<uint8_t> &input_data)
+bool Hamming74Encode::CheckInputDataOnCorrect(std::vector<uint8_t> &input_data)
 {
+	int counter = 0;
 	for (int i = 0; i < input_data.size(); i++)
 	{
 		if (input_data.at(i) == 0 || input_data.at(i) == 1)
 			continue;
 		else
-			throw "Error: invalid input data.";
+			counter++;
 	}
+
+	if (counter == 0)
+		return true;
+	else
+		return false;
 }
 
 void Hamming74Encode::AddingZeros(std::vector<uint8_t> &input_data)
