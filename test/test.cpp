@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <gtest/gtest.h>
 
-void Comparison(std::vector<uint8_t> &input_data, std::vector<uint8_t> &actual_data);
+void EncodeAndComparison(std::vector<uint8_t> &input_data, std::vector<uint8_t> &actual_data);
 
 TEST(TestHamming74Encode, ExceptionTest)
 {
@@ -59,7 +59,7 @@ TEST(TestHamming74Encode, EncodingTest)
 											   1,1,1,0,0,1,0,
 											   1,1,1,1,1,1,1 };
 
-	Comparison(input_data, expected_output_result);
+	EncodeAndComparison(input_data, expected_output_result);
 }
 
 TEST(TestHamming74Encode, EmptyInputTest)
@@ -82,7 +82,7 @@ TEST(TestHamming74Encode, SomeInputTest)
 												1, 0, 1, 0, 0, 0, 1 };
 
 
-	Comparison(input_data, expected_output_result);
+	EncodeAndComparison(input_data, expected_output_result);
 }
 
 int main(int argc, char *argv[])
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 	return RUN_ALL_TESTS();
 }
 
-void Comparison(std::vector<uint8_t> &input_data, std::vector<uint8_t> &expected_data)
+void EncodeAndComparison(std::vector<uint8_t> &input_data, std::vector<uint8_t> &expected_data)
 {
 	Hamming74Encode hamming_encode;
 	std::vector<uint8_t> actual_data = hamming_encode.Encode(input_data);
